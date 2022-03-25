@@ -39,3 +39,23 @@ The Python program will be terminated upon selection of this feature.
 - pandas - Used in pre-processing of the canteens.xlsx excel file
 - time - Used in giving a delay while getting the location of users A and B using pygame
 - math - Used in calculating the distance between users and canteens
+
+## Section 5: Main Functions
+1. main()
+
+Controls the main logic flow of the program and is responsible for getting user inputs and passing them to the helper and search functions.
+
+2. search_by_keyword(keywords)
+
+Receives the user inputted keywords as an argument, and outputs the corresponding canteens that match the keywords inputted.
+
+3. search_by_price(keywords, max_price)
+
+Receives the user inputted keywords, as well as the user defined maximum price as an argument, and outputs the corresponding canteens 
+that matches the keywords, and fall within the maximum price defined by the user. If no shops fall within the maximum price, the program
+outputs the food stall with the closest price to the maximum price defined.
+
+4. search_nearest_canteens(user_locations, k)
+
+Receives the user inputted locations of user A and B using pygame, as well as the k number of nearest canteens that the user wants to find.
+Outputs k number of food stalls that are closest to the midpoint of users A and B, as well as the distance to these food stalls.
