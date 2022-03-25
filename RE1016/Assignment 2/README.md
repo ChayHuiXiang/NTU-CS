@@ -51,11 +51,33 @@ Receives the user inputted keywords as an argument, and outputs the correspondin
 
 3. search_by_price(keywords, max_price)
 
-Receives the user inputted keywords, as well as the user defined maximum price as an argument, and outputs the corresponding canteens 
-that matches the keywords, and fall within the maximum price defined by the user. If no shops fall within the maximum price, the program
-outputs the food stall with the closest price to the maximum price defined.
+Receives the user inputted keywords, as well as the user defined maximum price as an argument, and outputs the corresponding canteens that matches the keywords, and fall within the maximum price defined by the user. If no shops fall within the maximum price, the program outputs the food stall with the closest price to the maximum price defined.
 
 4. search_nearest_canteens(user_locations, k)
 
-Receives the user inputted locations of user A and B using pygame, as well as the k number of nearest canteens that the user wants to find.
-Outputs k number of food stalls that are closest to the midpoint of users A and B, as well as the distance to these food stalls.
+Receives the user inputted locations of user A and B using pygame, as well as the k number of nearest canteens that the user wants to find. Outputs k number of food stalls that are closest to the midpoint of users A and B, as well as the distance to these food stalls.
+
+## Section 6: Helper Functions
+1. keywords_validation(keywords_list_processed)
+
+Receives the list of inputted keywords, and ensures that the inputted keywords are keywords_validation.
+
+2. find_no_keyword_matches(keywords_list_processed, matches_no)
+
+Receives the list of inputted keywords, as well as the desired number of matches we want. For eg. if the user keys in 'western and fries and burgers' as the input, and the integer '2' is passed in as matches_no, the function will return a dictionary of all shops that match exactly 2 of the keywords, as well as the number of matched shops.
+
+3. get_keyword_output(keywords_list)
+
+Receives the user inputted keywords, and outputs all matched shops, the total number of matches, as well as a boolean indicating whether the search process was erroneous.
+
+4. find_no_price_matches(max_price, entry)
+
+Receives the shops that matches the user inputted keywords, as well as the maximum price inputted by the user, and returns the number of matches below the maximum price, as well as a dictionary of all matched shops below the maximum price.
+
+5. find_closest_price_match(entries)
+
+Receives the shops that matches the user inputted keywords, and outputs the shop(s) that is closest to the maximum price set by the user
+
+6. display_output(output, total_matches, matches_output)
+
+Helper function that receives all matched shops and other miscellaneous information and prints all information onto the console.
