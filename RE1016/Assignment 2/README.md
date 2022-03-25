@@ -31,3 +31,11 @@ The location-based search recommends the nearest canteen for two users, A and B.
 5. exit program
 
 The Python program will be terminated upon selection of this feature.
+
+## Section 4: Requirements
+**Python libraries - pygame, pillow, pandas, time, math**
+- pygame - Used in location-based search, to get the location of users A and B
+- pillow - Used to open the provided image file, and then incorporated with pygame to get the location of users A and based
+- pandas - Used in pre-processing of the canteens.xlsx excel file
+- time - Used in giving a delay while getting the location of users A and B using pygame
+- math - Used in calculating the distance between users and canteens
