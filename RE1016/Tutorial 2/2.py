@@ -1,3 +1,9 @@
+# Write a short program that will:
+# • prompt the user for a number
+# • print the absolute value of the number if it is not a positive number
+# • prompt the user for another number if the input was not positive
+# Hint: math module will be useful.
+
 negative = True
 while negative:
     try:
