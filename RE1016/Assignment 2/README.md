@@ -13,16 +13,21 @@ README.md - current file containing all information regarding the project
 
 ## Section 3: Key Functionality
 1. display data
+
 The display data feature will display a Python dictionary of the pre-processed data from the canteens.xlsx excel file.
 
 2. keyword-based search
+
 The various shops in the canteens.xlsx excel file are associated with keywords such as Chinese, Spicy etc that describe the characteristics of the foods sold at the shops. With the Python Program, users are able to input keywords into the program, and the program will automatically output shops associated with the keywords. On top of this, users are able to input multiple keywords into the program, and chain these keywords with 'and' and 'or' operators. For example,'spicy or chinese' will return all shops that sell either spicy, or chinese foods, or both, while 'spicy and chinese' will return all shops that sell both spicy and chinese foods. 
 
 3. price-based search
+
 The price-based search is a more refined version of the keyword-based search, as it enables users to enter the maximum price of shops that they want to search for. Users will first key in the keywords of the shops that they are looking for, followed by a maximum price. The Python program will automatically output all shops that both match the inputted keywords, and are within the maximum price set by the user. If the maximum price set by the user is too low, the program will automatically output the shop with price closest to the maximum price set by the user.
 
 4. location-based search
+
 The location-based search recommends the nearest canteen for two users, A and B. When the location-based search feature is selected, the Python program will automatically start-up a pygame sequence of the NTU campus map. The user will then select the location of users A and B using the pin. Following which, the user will be prompted to key in the number of closest canteens that they want displayed. The python program will then output the closest canteens from the midpoint of users A and B. The number of closest canteens outputted will depend on the user input.
 
 5. exit program
+
 The Python program will be terminated upon selection of this feature.
