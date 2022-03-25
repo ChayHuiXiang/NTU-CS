@@ -1,5 +1,5 @@
-from msilib.schema import Error
-
+# Write a function that takes a list of email addresses as an argument and returns a list of tuples of 
+# username and domains.
 
 emails = ['chayhuixiang@gmail.com','abc@xyz.sg']
 def converter(emails):

@@ -1,3 +1,7 @@
+# A matrix can be represented in Python using a list of lists. The elements of the list would be the row 
+# values, and the elements of the nested lists would be the column values. Write a function that accepts 
+# a list of lists matrix and transposes it by switching around the row and column values
+
 def transpose(listVariable):
     newList = [[None for x in range(len(listVariable))] for x in range(len(listVariable[0]))]
     for rowIndex, row in enumerate(listVariable):
