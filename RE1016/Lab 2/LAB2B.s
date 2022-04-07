@@ -17,10 +17,10 @@ __Vectors   DCD     TOP_STACK           		; Vector table start here, first enty 
 ENTRY                       					; Mark first instruction to execute
 START   	PROC								; Declaration of subroutine/function 
 			LDR		R2,=0xA0000000				; Store address 0xA0000000 in R2
-leds_even	LDR		R0,=0x2AA					; Store address 0x3FF in R0, even LEDS
+leds_even	LDR		R0,=0x2AA					; Store address 0x2AA in R0, even LEDS
 			STR     R0,[R2,#0x00]        		; Store the value to the DE0_LED address
 			BL    	DELAY                    	; Call the DELAY function
-leds_odd	LDR    	r0,=0x155            		; MOVE new values to r0, odd LEDS
+leds_odd	LDR    	r0,=0x155            		; MOVE new value of 0x155 to r0, odd LEDS
 			STR     r0,[r2,#0x00]      			; Store the value to the DE0_LED address
 			BL    	DELAY                   	; Call the DELAY function
 			B    	leds_even                 	; Repeat
