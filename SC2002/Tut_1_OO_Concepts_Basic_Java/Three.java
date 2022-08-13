@@ -24,10 +24,13 @@ class Three {
     Scanner sc = new Scanner(System.in);
     System.out.println("\n\n Enter number of Integer elements to be sorted: ");
     n = sc.nextInt();
+    sc.close();
 
     for (i = 0; i <= n - 1; i++) {
+      Scanner scanner = new Scanner(System.in);
       System.out.println("\n\n Enter integer value for element no." + (i + 1) + ": ");
-      a[i] = sc.nextInt();
+      a[i] = scanner.nextInt();
+      scanner.close();
     }
 
     bubble(a, n);
@@ -36,5 +39,7 @@ class Three {
     for (i = 0; i <= n - 1; i++) {
       System.out.print(a[i]);
     }
+
+    
   }
 }

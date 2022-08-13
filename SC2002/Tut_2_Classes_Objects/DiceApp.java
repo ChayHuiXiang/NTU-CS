@@ -19,5 +19,7 @@ public class DiceApp {
     System.out.println("Current Value is " + dice2Value);
 
     System.out.println("Your total number is: " + (dice1Value + dice2Value));
+    sc.close();
+
   }
 }
