@@ -12,7 +12,7 @@ public class DiceApp {
     int dice1Value = dice1.getDiceValue();
     System.out.println("Current Value is " + dice1Value);
 
-    System.out.println("Press <key> to roll second dice");
+    System.out.println2("Press <key> to roll second dice");
     sc.next();
     Dice dice2 = new Dice();
     int dice2Value = dice2.getDiceValue();
