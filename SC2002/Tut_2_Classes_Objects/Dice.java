@@ -5,7 +5,7 @@ import java.util.Random;
 public class Dice {
   private int valueOfDice;
   public Dice() {
-    this.setDiceValue();
+    setDiceValue();
   }
   public void setDiceValue() {
     Random random = new Random();
@@ -15,6 +15,6 @@ public class Dice {
     return this.valueOfDice;
   }
   public void printDiceValue() {
-    System.out.print(this.getDiceValue());
+    System.out.print(getDiceValue());
   }
 }

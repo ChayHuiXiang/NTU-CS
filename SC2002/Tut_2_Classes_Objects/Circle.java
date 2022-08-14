@@ -5,7 +5,7 @@ public class Circle {
   private static final double PI = 3.14159;
   // constructor
   public Circle(double rad) {
-    this.setRadius(rad);
+    setRadius(rad);
   }
   // mutator method – set radius
   public void setRadius(double rad) {
@@ -25,10 +25,10 @@ public class Circle {
   }
   // print area
   public void printArea(){
-    System.out.println(this.area());
+    System.out.println(area());
   }
   // print circumference
   public void printCircumference(){
-    System.out.println(this.circumference());
+    System.out.println(circumference());
   } 
 }
