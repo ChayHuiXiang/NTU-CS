@@ -1,4 +1,4 @@
-package SC2002.Lab_1;
+// package SC2002.Lab_1;
 
 import java.util.Scanner;
 public class P3 {
