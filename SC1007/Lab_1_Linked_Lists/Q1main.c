@@ -105,6 +105,7 @@ int removeNode(ListNode **ptrHead, int index) {
     }
     if (index == 0) {
         *ptrHead = headPtr->next;
+        free(headPtr);
         return 1;
     } else if ((pre = findNode(headPtr, index-1)) != NULL && findNode(headPtr, index) != NULL) {
         pre->next = pre->next->next;
