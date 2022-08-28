@@ -9,3 +9,29 @@ To illustrate, eg.
 
 - List1: [1, 1, 1, 1, 1, 1]
 - List2: [3, 2, 4, 2, 5, 6, 1]
+
+## Q2a
+For this question, we'll assess the loops one by one. Removing the inner loop, we have
+```c
+void Q2a (int N) {
+  int j;
+  for (j =1; j <= N;j *=3)
+    printf (" SC1007 \n");
+  }
+```
+
+As N increases in size, as j increases exponentially, the number of times that "SC1007" gets printed grows in a logarithmic manner. Θ(logN)
+
+Now we insert the inner loop
+```c
+void Q2a (int N) {
+  int j, k;
+  for (j =1; j <= N;j *=3)
+    for (k =1; k <= N; k *=2)
+      printf (" SC1007 \n");
+  }
+```
+
+As N increases in size, both j and k increase exponentially, hence the number of times that "SC1007" gets printed grows in a logarithmic^2 manner. Θ((logN)^2)
+
+## Q2b
