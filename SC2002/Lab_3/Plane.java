@@ -9,46 +9,53 @@ public class Plane {
 
   public Plane() {
     for (int i = 0; i < seat.length; i++) {
-      seat[i] = new PlaneSeat(i);
+      seat[i] = new PlaneSeat(i+1);
     }
   }
 
   public void assignSeat(int seatId, int cust_id) {
-    PlaneSeat targetSeat = seat[seatId];
-    targetSeat.assign(cust_id);
-    numEmptySeat--;
+    for (int i = 0; i < seat.length; i++) {
+      if (seat[i].getSeatId() == seatId) {
+        if (seat[i].isOccupied()) {
+          System.out.println("Seat already assigned to a customer.");
+        } else {
+          seat[i].assign(cust_id);
+          numEmptySeat--;
+        }
+      }
+    }
   }
 
   public void unAssignSeat(int seatId) {
-    for (int i = 0; i < seat.length - numEmptySeat; i++) {
+    for (int i = 0; i < seat.length; i++) {
       if (seat[i].getSeatId() == seatId) {
         seat[i].unAssign();
+        numEmptySeat++;
       }
     }
-    numEmptySeat++;
   }
 
   public void showNumEmptySeats() {
-    System.out.println("Number of empty seats: " + this.numEmptySeat);
+    System.out.printf("There are %d empty seats\n", numEmptySeat);
   }
 
   public void showEmptySeats() {
-    System.out.println("Empty Seat IDs: ");
+    System.out.println("The following seats are empty:");
     for (int i = 0; i < this.seat.length; i++) {
       if (!this.seat[i].isOccupied()) {
-        System.out.print(seat[i].getSeatId() + " ");
+        System.out.println("SeatID " + seat[i].getSeatId());
       }
     }
   }
 
   public void showAssignedSeats(boolean bySeatId) {
 
-    PlaneSeat[] targetSeat = bySeatId ? sortSeats() : seat;
+    PlaneSeat[] targetSeat = bySeatId ? seat : sortSeats();
 
-    System.out.println("Assigned Seats:");
+    System.out.println("The seat assignments are as follow:");
     for (int i = 0; i < targetSeat.length; i++) {
       if (targetSeat[i].isOccupied()) {
-        System.out.println("Seat Id: " + targetSeat[i].getSeatId() + " Customer Id: " + targetSeat[i].getCustomerId());
+        System.out.println("SeatID " + targetSeat[i].getSeatId() + " assigned to CustomerID " + targetSeat[i].getCustomerId() + ".");
       }
     }
   }

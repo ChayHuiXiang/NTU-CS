@@ -22,12 +22,14 @@ public class PlaneSeat {
   }
 
   public void assign(int cust_id) {
-    this.customerId = cust_id;
-    this.assigned = true;
+    customerId = cust_id;
+    assigned = true;
+    System.out.println("Seat Assigned!");
   }
 
   public void unAssign() {
-    this.customerId = 0;
-    this.assigned = false;
+    customerId = 0;
+    assigned = false;
+    System.out.println("Seat Unassigned!");
   }
 }
