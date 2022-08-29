@@ -151,5 +151,24 @@ void deleteQueue(Queue *qPtr)
 }
 
 int balanced(char *expression){
- //Write your code here
+    //Write your code here
+    Stack stack;
+    stack.size = 0;
+    stack.head = NULL;
+    Stack* stackPtr = &stack;
+
+    for (; *expression; expression++) {
+        char character = *expression;
+        if (character == '{' || character == '[' || character == '(') {
+            push(stackPtr, character);
+        } else {
+            char top = peek(*stackPtr);
+            if (top == '[' && character != ']' || top == '(' && character != ')' || top == '{' && character != '}') {
+                return 0;
+            }
+            pop(stackPtr);
+        }
+    }
+
+    return isEmptyStack(*stackPtr); 
 }
