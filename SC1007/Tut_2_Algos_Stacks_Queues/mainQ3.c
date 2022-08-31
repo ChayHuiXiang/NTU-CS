@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define SIZE 1000 //The limit of expression length
 
@@ -59,16 +60,54 @@ double peek(Stack s){
 }
 
 int isEmptyStack(Stack s){
-     if(s.size == 0) return 1;
-     else return 0;
+    if(s.size == 0) return 1;
+    else return 0;
 }
 
 double exePostfix(char* postfix)
 {
- //Write your code here
+    Stack stack;
+    stack.head = NULL;
+    stack.size = 0;
+    Stack* stackPtr = &stack;
 
+    for (; *postfix; postfix++) {
+        char character = *postfix;
+        printf("%c\n", character);
+        if (isdigit(character)) {
+            push(stackPtr, strtod(&character, NULL));
+        } else {
+            double digit1 = peek(*stackPtr);
+            pop(stackPtr);
+            double digit2 = peek(*stackPtr);
+            pop(stackPtr);
+            printf("%lf %lf\n", digit1, digit2);
+            double result;
+            switch (character) {
+                case '*':
+                    result = digit2 * digit1;
+                    break;
 
+                case '/':
+                    result = digit2 / digit1;
+                    break;
 
+                case '+':
+                    result = digit2 + digit1;
+                    break;
+
+                case '-':
+                    result = digit2 - digit1;
+                    break;
+                
+                default:
+                    break;
+            }
+            push(stackPtr, result);
+        }
+    }
+
+    return peek(*stackPtr);
 
 
 }

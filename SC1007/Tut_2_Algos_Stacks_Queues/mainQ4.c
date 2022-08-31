@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define SIZE 1000 //The limit of expression length
 
@@ -65,12 +66,54 @@ int isEmptyStack(Stack s){
      else return 0;
 }
 
-void in2Post(char* infix, char* postfix)
-{
- //Write your code here
- 
- 
- 
- 
- 
+int higherPrecedence(char first, char second) {
+    if (second == '+' || second == '-') {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+void in2Post(char* infix, char* postfix) {
+    //Write your code here
+
+    char* dummy = postfix;
+
+    Stack stack;
+    stack.head = NULL;
+    stack.size = 0;
+    Stack* stackPtr = &stack;
+
+    for (;*infix;infix++) {
+        char character = *infix;
+        if (isdigit(character)) {
+            printf("%s %c\n", postfix, character);
+            *postfix++ = character;
+            printf("%s %c\n", postfix, character);
+        } else if (character == '(') {
+            push(stackPtr, character);
+        } else if (character == ')') {
+            while (peek(*stackPtr) != '(') {
+                char operator = peek(*stackPtr);
+                pop(stackPtr);
+                *postfix++ = operator;
+            }
+            pop(stackPtr);
+        } else {
+            while (!isEmptyStack(*stackPtr) && peek(*stackPtr) != '(' && higherPrecedence(peek(*stackPtr), character)) {
+                char operator = peek(*stackPtr);
+                printf("%c", operator);
+                pop(stackPtr);
+                *postfix++ = operator;
+            }
+            push(stackPtr, character);
+        }
+    }
+
+    while (!isEmptyStack(*stackPtr)) {
+        char operator = peek(*stackPtr);
+        pop(stackPtr);
+        *postfix++ = operator;
+    }
+    *postfix = '\0';
 }
