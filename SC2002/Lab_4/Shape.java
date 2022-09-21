@@ -1,22 +1,16 @@
 import java.util.Scanner;
 
 public class Shape {
-  enum ShapeType {
-    SQUARE,
-    RECTANGLE,
-    CIRCLE,
-    TRIANGLE
-  }
+  public String shapeType;
+  public int length;
+  public int breadth;
+  public int radius;
 
-  private ShapeType shapeType;
-  private int length;
-  private int breadth;
-  private int radius;
-
-  private static Scanner sc;
+  public static Scanner sc;
 
   public Shape() {
     sc = new Scanner(System.in);
+    System.out.println("test la");
     while (shapeType == null) {
       System.out.println("Enter your desired shape: ");
       String shape = sc.nextLine();
@@ -27,13 +21,13 @@ public class Shape {
           length = sc.nextInt();
           System.out.println("Please enter your desired breadth");
           breadth = sc.nextInt();
-          shapeType = ShapeType.TRIANGLE;
+          shapeType = "triangle";
           break;
         
         case "square":
           System.out.println("Please enter your desired length");
           length = sc.nextInt();
-          shapeType = ShapeType.SQUARE;
+          shapeType = "square";
           break;
   
         case "rectangle":
@@ -41,13 +35,13 @@ public class Shape {
           length = sc.nextInt();
           System.out.println("Please enter your desired breadth");
           breadth = sc.nextInt();
-          shapeType = ShapeType.RECTANGLE;
+          shapeType = "rectangle";
           break;
   
         case "circle":
           System.out.println("Please enter your desired radius");
           radius = sc.nextInt();
-          shapeType = ShapeType.CIRCLE;
+          shapeType = "circle";
           break;
   
         default:
@@ -59,16 +53,16 @@ public class Shape {
 
   public double calculateArea() {
     switch (shapeType) {
-      case CIRCLE:
+      case "circle":
         return Math.PI * radius * radius;
 
-      case SQUARE:
+      case "square":
         return length * length;
 
-      case TRIANGLE:
+      case "triangle":
         return 0.5*length*breadth;
 
-      case RECTANGLE:
+      case "rectangle":
         return length * breadth;
     
       default:
