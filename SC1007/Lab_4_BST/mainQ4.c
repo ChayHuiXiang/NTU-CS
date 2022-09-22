@@ -123,8 +123,8 @@ void rotateRNode(BTNode **node){
 //Write Your Code Here
     BTNode* root = *node;
     BTNode* left = root->left;
-    BTNode* leftRight = left ? left->right : NULL;
-
+    BTNode* leftRight = left->right;
+    
     root->left = leftRight;
     left->right = root;
     *node = left;
