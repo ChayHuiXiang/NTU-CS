@@ -42,7 +42,7 @@ int main()
         if(option)
             rotateRNode(&(cur->right));
         else
-             rotateRNode(&(cur->left));
+            rotateRNode(&(cur->left));
 
     printBTNode(rootBST,0,0);
 
@@ -121,4 +121,11 @@ void deleteTree(BTNode **root){
 
 void rotateRNode(BTNode **node){
 //Write Your Code Here
+    BTNode* root = *node;
+    BTNode* left = root->left;
+    BTNode* leftRight = left ? left->right : NULL;
+
+    root->left = leftRight;
+    left->right = root;
+    *node = left;
 }
