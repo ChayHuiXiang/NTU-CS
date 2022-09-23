@@ -1,61 +1,60 @@
-import java.util.Scanner;
+public class Shape3D extends Shape {
+  public int dimension3;
 
-public class Shape3D {
-  private int height;
+  public Shape3D(int dimension1, String shapeType) {
+    this(dimension1, 0, shapeType);
+  }
 
-  public Shape3D() {
-    // System.out.println("test");
-    // sc = new Scanner(System.in);
-    // while (shapeType == null) {
-    //   System.out.println("Enter your desired shape: ");
-    //   String shape = sc.nextLine();
-    //   shape = shape.toLowerCase();
-    //   switch (shape) {
-    //     case "sphere":
-    //       System.out.println("Please enter your desired radius: ");
-    //       radius = sc.nextInt();
-    //       shapeType = "sphere";
-    //       break;
-        
-    //     case "pyramid":
-    //       System.out.println("Please enter your desired length: ");
-    //       length = sc.nextInt();
-    //       System.out.println("Please enter your desired height: ");
-    //       height = sc.nextInt();
-    //       shapeType = "pyramid";
-    //       break;
+  public Shape3D(int dimension1, int dimension2, String shapeType) {
+    this(dimension1, dimension2, 0, shapeType);
+  }
 
-    //     case "cuboid":
-    //       System.out.println("Please enter your desired length: ");
-    //       length = sc.nextInt();
-    //       System.out.println("Please enter your desired breadth: ");
-    //       breadth = sc.nextInt();
-    //       System.out.println("Please enter your desired height: ");
-    //       height = sc.nextInt();
-    //       shapeType = "cuboid";
-    //       break;
-        
-    //     default:
-    //       System.out.println("Invalid shape! Please try again");
-    //       break;
-    //   }
-    // }
+  public Shape3D(int dimension1, int dimension2, int dimension3, String shapeType) {
+    super(dimension1, dimension2, shapeType);
+    this.dimension3 = dimension3;
   }
 
   public double calculateArea() {
-  //   switch (shapeType) {
-  //     case "sphere":
-  //       return 4 * Math.PI * radius * radius;
+    switch (shapeType) {
+      case "sphere":
+        return 4 * Math.PI * dimension1 * dimension1;
+      
+      case "pyramid":
+        return dimension1 * dimension1 + 2 * dimension1 * Math.sqrt(dimension1 * dimension1 / 4 + dimension2 * dimension2);
 
-  //     case "pyramid":
-  //       return length * length + 2 * length * height;
+      case "cuboid":
+        return dimension1 * dimension2 * dimension3;
 
-  //     case "cuboid":
-  //       return 2 * length * height + 2 * length * breadth + 2 * breadth * height;
+      case "cone":
+        return Math.PI * dimension1 * (dimension1 + Math.sqrt(dimension2 * dimension2 + dimension1 * dimension1));
 
-  //     default:
-  //       return 0;
-  //   }
-    return 0;
+      case "cylinder":
+        return 2 * Math.PI * dimension1 * dimension2 + 2 * Math.PI * dimension1 * dimension1;
+
+      default:
+        return 0;
+    }
+  }
+
+  public double calculateVolume() {
+    switch (shapeType) {
+      case "sphere":
+        return 4 / 3 * Math.PI * dimension1 * dimension1 * dimension1;
+
+      case "pyramid":
+        return dimension1 * dimension1 * dimension2 / 3;
+
+      case "cuboid":
+        return dimension1 * dimension2 * dimension3;
+
+      case "cylinder":
+        return Math.PI * dimension1 * dimension1 * dimension2;
+
+      case "cone":
+        return Math.PI * dimension1 * dimension1 * dimension2 / 3;
+    
+      default:
+        return 0;
+    }
   }
 }
