@@ -108,4 +108,32 @@ void deleteList2(LinkedList *ll){
 
 void moveEvenItemsToBack(LinkedList *ll){
     // not implemented yet
+    ListNode* curr = ll->head;
+    ListNode* prev = NULL;
+
+    LinkedList evenll;
+    evenll.head = 0;
+    evenll.size = 0;
+    while (curr) {
+        int currItem = curr->item;
+        if (currItem % 2 == 0) { // even
+            insertNode2(&evenll, evenll.size, currItem);
+            if (prev) {
+                prev->next = curr->next;
+                curr = curr->next;
+            } else {
+                curr = curr->next;
+                ll->head = curr;
+            }
+        } else { // odd
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+
+    if (prev) {
+        prev->next = evenll.head;
+    } else {
+        ll->head = evenll.head;
+    }
 }

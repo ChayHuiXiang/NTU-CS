@@ -87,5 +87,22 @@ void deleteTree(BTNode **root){
 
 int hasGreatGrandchild(BTNode *node){
 //Write your code here
-
+    BTNode* left = node->left;
+    BTNode* right = node->right;
+    if (!left && !right) {
+        return 1;
+    }
+    int leftChildCount = 0;
+    int rightChildCount = 0;
+    if (left) {
+        leftChildCount = hasGreatGrandchild(node->left);
+    }
+    if (right) {
+        rightChildCount = hasGreatGrandchild(node->right);
+    }
+    int childCount = leftChildCount < rightChildCount ? rightChildCount : leftChildCount;
+    if (childCount >= 3) {
+        printf("%d ", node->item);
+    }
+    return childCount + 1;
 }

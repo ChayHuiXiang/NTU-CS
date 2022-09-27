@@ -95,4 +95,43 @@ void deleteList(ListNode **ptrHead){
 
 int moveMaxToFront(ListNode **ptrHead){
     // not implemented yet
+    ListNode* curr = *ptrHead;
+    int index = 0;
+    int max = 0;
+    int maxIndex = 0;
+    while (curr) {
+        int currItem = curr->item;
+        if (currItem > max) {
+            max = currItem;
+            maxIndex = index;
+        }
+        curr = curr->next;
+        index++;
+    }
+
+    if (maxIndex == 0) {
+        return 0;
+    }
+
+    ListNode* newHead = (ListNode*)malloc(sizeof(ListNode));
+    newHead->item = max;
+    curr = *ptrHead;
+    newHead->next = curr;
+    ListNode* prev = NULL;
+    index = 0;
+    
+    while (curr) {
+
+        if (index == maxIndex) {
+            prev->next = curr->next;
+        }
+
+        prev = curr;
+        curr = curr->next;
+        index++;
+    }
+
+    *ptrHead = newHead;
+
+    return maxIndex;
 }

@@ -104,9 +104,11 @@ void deleteQueue(Queue *qPtr)
 }
 
 void recursiveReverse(Queue *qPtr){
-//Write your code here
-
-
-
-
+    //Write your code here
+    int value = getFront(*qPtr);
+    dequeue(qPtr);
+    if (!isEmptyQueue(*qPtr)) {
+        recursiveReverse(qPtr);
+    }
+    enqueue(qPtr, value);
 }

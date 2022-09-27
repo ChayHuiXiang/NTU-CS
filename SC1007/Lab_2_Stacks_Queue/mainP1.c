@@ -152,7 +152,23 @@ void deleteQueue(Queue *qPtr)
 void reverseStack(Stack *sPtr)
 {
 //Write your code here
+    Queue q;
+    q.head = NULL;
+    q.size = 0;
+    q.tail = NULL;
 
+    Queue* qPtr = &q;
 
+    while (!isEmptyStack(*sPtr)) {
+        int value = peek(*sPtr);
+        pop(sPtr);
+        enqueue(qPtr, value);
+    }
+
+    while (!isEmptyQueue(*qPtr)) {
+        int value = getFront(*qPtr);
+        dequeue(qPtr);
+        push(sPtr, value);
+    }
 
 }

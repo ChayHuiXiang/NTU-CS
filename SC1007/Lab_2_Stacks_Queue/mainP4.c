@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define SIZE 1000 //The limit of expression length
 
@@ -66,8 +67,65 @@ int isEmptyStack(Stack s){
      else return 0;
 }
 
+int higherPrecedence(char operator1, char operator2) {
+    if ((operator1 == '*' || operator1 == '/') && (operator2 == '+' || operator2 == '-')) {
+        return 1;
+    }
+    return 0;
+}
+
 void in2Pre(char* infix, char* prefix)
 {
- //Write your code here
+    //Write your code here
+    Stack s;
+    s.head = NULL;
+    s.size = 0;
+    Stack* sPtr = &s;
+
+    Stack prefixS;
+    prefixS.head = NULL;
+    prefixS.size = 0;
+    Stack* prefixSPtr = &prefixS;
+
+    while (*infix) {
+        infix++;
+    }
+    infix--;
+
+    while (*infix) {
+        if (*infix == ')') {
+            push(sPtr, ')');
+        } else if (isalnum(*infix)) {
+            push(prefixSPtr, *infix);
+        } else if (*infix == '(') {
+            while (peek(*sPtr) != ')') {
+                char top = peek(*sPtr);
+                pop(sPtr);
+                push(prefixSPtr, top);
+            }
+            pop(sPtr);
+        } else {
+            while (!isEmptyStack(*sPtr) && higherPrecedence(peek(*sPtr), *infix)) {
+                int operator = peek(*sPtr);
+                pop(sPtr);
+                push(prefixSPtr, operator);
+            }
+            push(sPtr, *infix);
+        }
+        infix--;
+    }
+
+    while (!isEmptyStack(*sPtr)) {
+        char top = peek(*sPtr);
+        pop(sPtr);
+        push(prefixSPtr, top);
+    }
+
+    while (!isEmptyStack(*prefixSPtr)) {
+        char top = peek(*prefixSPtr);
+        pop(prefixSPtr);
+        *prefix++ = top;
+    }
+    *prefix = '\0';
 
 }

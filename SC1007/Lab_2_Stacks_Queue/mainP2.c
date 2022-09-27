@@ -159,6 +159,30 @@ void deleteQueue(Queue *qPtr)
 
 void reverseFirstKItems(Queue *qPtr, int k)
 {
-//Write your code here
+    //Write your code here
+    Stack s;
+    s.head = NULL;
+    s.size = 0;
 
+    int j = qPtr->size - k;
+
+    Stack* sPtr = &s;
+
+    for (int i = 0; i<k; i++) {
+        int value = getFront(*qPtr);
+        dequeue(qPtr);
+        push(sPtr, value);
+    }
+
+    while (!isEmptyStack(*sPtr)) {
+        int value = peek(*sPtr);
+        enqueue(qPtr, value);
+        pop(sPtr);
+    }
+
+    for (int i = 0; i<j; i++) {
+        int value = getFront(*qPtr);
+        dequeue(qPtr);
+        enqueue(qPtr, value);
+    }
 }
