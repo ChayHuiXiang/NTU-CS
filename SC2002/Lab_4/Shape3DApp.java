@@ -58,7 +58,7 @@ public class Shape3DApp {
           break;
 
         case 4:
-          System.out.print("Enter radius of cone bone: ");
+          System.out.print("Enter radius of cone: ");
           dimension1 = sc.nextInt();
           System.out.print("Enter height of cone: ");
           dimension2 = sc.nextInt();

@@ -23,7 +23,7 @@ public class Shape3D extends Shape {
         return dimension1 * dimension1 + 2 * dimension1 * Math.sqrt(dimension1 * dimension1 / 4 + dimension2 * dimension2);
 
       case "cuboid":
-        return dimension1 * dimension2 * dimension3;
+        return  2 * (dimension1 * dimension2) + 2 * (dimension1 * dimension3) + 2 * (dimension2 * dimension3);
 
       case "cone":
         return Math.PI * dimension1 * (dimension1 + Math.sqrt(dimension2 * dimension2 + dimension1 * dimension1));
@@ -39,10 +39,10 @@ public class Shape3D extends Shape {
   public double calculateVolume() {
     switch (shapeType) {
       case "sphere":
-        return 4 / 3 * Math.PI * dimension1 * dimension1 * dimension1;
+        return Math.PI * dimension1 * dimension1 * dimension1 * 4 / 3;
 
       case "pyramid":
-        return dimension1 * dimension1 * dimension2 / 3;
+        return dimension3 * dimension1 * dimension2 / 3;
 
       case "cuboid":
         return dimension1 * dimension2 * dimension3;
