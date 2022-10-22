@@ -73,9 +73,9 @@ int main()
     
     printGraphList(g);
 
-    // calDegreeV(g,degreeV);
+    calDegreeV(g,degreeV);
     
-    // printDegreeV(degreeV,g.V);
+    printDegreeV(degreeV,g.V);
 
     return 0;
 }
@@ -97,33 +97,33 @@ void printGraphMatrix(Graph g)
 
 void adjM2adjL(Graph *g)
 {
-	g->type = ADJ_LIST; //change representation form
 
     // Question 2
     // Write your code here
   int V = g->V;
-  (g->adj).list = (ListNode **)malloc(V*sizeof(ListNode*));
-  ListNode** list = (g->adj).list;
+  ListNode** list = (ListNode **)malloc(V*sizeof(ListNode*));
   
   int i, j;
   for (i = 0; i<(g->V); i++) {
     ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
-    temp->vertex = i;
+    temp->vertex = i+1;
     temp->next = NULL;
     list[i] = temp;
     
     for (j = 0; j<(g->V); j++) {
-      printf("%d %d %d | ", (g->adj).matrix[i][j], i, j);
       int isConnected = (g->adj).matrix[i][j];
       if (isConnected) {
         ListNode* newNode = (ListNode*)malloc(sizeof(ListNode));
-        newNode->vertex = j;
+        newNode->vertex = j+1;
         newNode->next = NULL;
         temp->next = newNode;
         temp = temp->next;
       }
     }
   }
+    g->type = ADJ_LIST; //change representation form
+
+  g->adj.list = list;
 }
 
 
@@ -150,6 +150,17 @@ void calDegreeV(Graph g, int *degreeV)
 {
     // Question 3
     // Write your code here
+    int V = g.V;
+    ListNode** list = g.adj.list;
+    for (int i = 0; i<V; i++) {
+        ListNode* temp = list[i];
+        int count = 0;
+        while (temp) {
+            count++;
+            temp = temp->next;
+        }
+        degreeV[i] = count;
+    }
 }
 
 void printDegreeV(int *degreeV,int V)
