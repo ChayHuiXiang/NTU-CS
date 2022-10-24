@@ -7,4 +7,4 @@ RE1011      | Mathematics I                       | 1             | Python
 RE1012      | Mathematics II                      | 1             | Python
 RE1016      | Engineering Computation             | 1             | Python, ARM Assembly
 SC1007      | Data Structures & Algorithms        | 2             | C
-SC2002      | Object Oriented Design & Programming| 2             | Java
+SC2002      | Object Oriented Design & Programming| 2             | Java, C++
