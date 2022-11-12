@@ -8,3 +8,4 @@ RE1012      | Mathematics II                      | 1             | Python
 RE1016      | Engineering Computation             | 1             | Python, ARM Assembly
 SC1007      | Data Structures & Algorithms        | 2             | C
 SC2002      | Object Oriented Design & Programming| 2             | Java, C++
+SC2006      | Software Engineering                | 2             | Javascript, Python
