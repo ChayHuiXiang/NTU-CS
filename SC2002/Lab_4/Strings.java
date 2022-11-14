@@ -14,8 +14,9 @@ public class Strings {
     System.out.println ("\nEnter the strings...");
     for (int i = 0; i < size; i++)
       stringList[i] = scan.next();
-      Sorting.insertionSort(stringList);
-      System.out.println("\nYour strings in sorted order...");
+    Sorting.insertionSort(stringList);
+    System.out.println("\nYour strings in sorted order...");
+    scan.close();
     for (int i = 0; i < size; i++)
       System.out.print(stringList[i] + " ");
     System.out.println();

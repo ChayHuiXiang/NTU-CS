@@ -44,9 +44,7 @@ class Dog: public Mammal {
   private:
     string owner;
   public:
-    Dog(string o, COLOR c, string n): Mammal(n, c) {
-      owner = o;
-    }
+    Dog(string o, COLOR c, string n): Mammal(n, c), owner(o) {}
     ~Dog() {}
     void speak() const {
       cout << "Dog Woof" << endl;
@@ -60,9 +58,7 @@ class Cat: public Mammal {
   private:
     string owner;
   public:
-    Cat(string o, COLOR c, string n): Mammal(n, c) {
-      owner = o;
-    }
+    Cat(string o, COLOR c, string n): Mammal(n, c), owner(o) {}
     ~Cat() {}
     void speak() const {
       cout << "Cat Meow" << endl;
