@@ -83,13 +83,14 @@ void BFS(Graph g, int v){
     qPtr->head = NULL;
     qPtr->tail = NULL;
     qPtr->size = 0;
+
     
     int index = v-1;
     enqueue(qPtr, index);
     g.visited[index] = 1;
 
-    while (!isEmptyQueue(q)) {
-      int index = getFront(q);
+    while (!isEmptyQueue(*qPtr)) {
+      int index = getFront(*qPtr);
       printf("%d ", index+1);
       dequeue(qPtr);
 
@@ -127,7 +128,7 @@ void enqueue(Queue *qPtr, int item) {
     newNode->next = NULL;
 
     if(isEmptyQueue(*qPtr))
-        qPtr->head=newNode;
+        qPtr->head=newNode; 
     else
         qPtr->tail->next = newNode;
 
@@ -138,8 +139,7 @@ void enqueue(Queue *qPtr, int item) {
 int dequeue(Queue *qPtr) {
     if(qPtr==NULL || qPtr->head==NULL){ //Queue is empty or NULL pointer
         return 0;
-    }
-    else{
+    } else {
        int headValue = qPtr->head->vertex;
        QueueNode *temp = qPtr->head;
        qPtr->head = qPtr->head->next;

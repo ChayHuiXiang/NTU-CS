@@ -33,11 +33,10 @@ int cr_top_down_dp(int *p, int n)
       }
       int price_i = p[i];
       int total = max_r + price_i;
-
       max = total > max ? total : max;
     }
     r[n] = max;
-    return max;
+    return r[n];
 }
 
 int cr_bottom_up_dp(int *p, int n)
