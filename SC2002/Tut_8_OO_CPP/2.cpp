@@ -60,15 +60,15 @@ class Triangle: public Polygon {
 
 class TestPolygon {
   public:
-    static void printArea(Polygon* p) {
-      float area = p->calArea();
+    static void printArea(Polygon& p) {
+      float area = p.calArea();
       cout << "Area of polygon: " << area << endl;
     }
 };
 
 int main() {
-  Polygon* r = new Rectangle("rectangle", 10, 10);
-  Polygon* t = new Triangle("triangle", 10, 10);
+  Rectangle r("rectangle", 10, 10);
+  Triangle t("triangle", 10, 10);
   TestPolygon::printArea(r);
   TestPolygon::printArea(t);
 }
