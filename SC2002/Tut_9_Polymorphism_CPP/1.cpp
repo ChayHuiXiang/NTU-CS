@@ -20,14 +20,14 @@ class B: public A {
     B(int m, int n, float u, float v): A(m, n), p(u), q(v) {}
     B(): A(0, 0), p(0), q(0) {}
     void input(float u, float v);
-    virtual void print(void);
+    virtual void print(float);
 };
 
 void A::print(void) {
   cout << "A values: " << a << " " << b << "\n" ;
 }
 
-void B::print(void) {
+void B::print(float) {
   cout << "B values : " << p << " " << q << "\n" ;
 }
 
