@@ -41,6 +41,7 @@ class C extends A {
 
 public class Main {
   public static void main(String[] args) {
+    @SuppressWarnings("unused")
     B test1 = new B();
     // B test2 = new B(10);
     // C test3 = new C();
