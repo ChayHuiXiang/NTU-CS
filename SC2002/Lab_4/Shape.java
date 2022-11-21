@@ -1,3 +1,6 @@
+package SC2002.Lab_4;
+
+
 public class Shape {
   public String shapeType;
   public int dimension1;

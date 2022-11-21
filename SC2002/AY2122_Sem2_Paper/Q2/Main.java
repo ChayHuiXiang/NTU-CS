@@ -1,6 +1,7 @@
 package SC2002.AY2122_Sem2_Paper.Q2;
 
 class A {
+  @SuppressWarnings("unused")
   private int n;
   A() {
     System.out.println("a1");
@@ -13,6 +14,7 @@ class A {
 }
 
 class B extends A {
+  @SuppressWarnings("unused")
   private int n;
   B() {
     System.out.println("b1");
@@ -25,6 +27,7 @@ class B extends A {
 }
 
 class C extends A {
+  @SuppressWarnings("unused")
   private int n;
   C() {
     super(30);

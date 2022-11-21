@@ -57,7 +57,6 @@ public class CalculatorEx {
         updatedResult = evaluate(op, result, n2);
         System.out.println("result " + op + " " + n2 + " = " + updatedResult);
       } catch (UnknownOperatorException e) {
-        // TODO: handle exception
         updatedResult = handleUnknownOpException(e, sc);
       }
       System.out.println("updated result = " + updatedResult);

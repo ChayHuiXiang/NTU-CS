@@ -1,3 +1,5 @@
+package SC2002.Lab_2;
+
 import java.util.Scanner;
 import java.lang.Math;
 

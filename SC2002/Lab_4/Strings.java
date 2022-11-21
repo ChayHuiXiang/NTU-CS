@@ -1,3 +1,6 @@
+package SC2002.Lab_4;
+
+
 import java.util.Scanner;
 public class Strings {
 // --------------------------------------------

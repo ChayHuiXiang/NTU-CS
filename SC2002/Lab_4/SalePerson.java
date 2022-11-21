@@ -1,3 +1,5 @@
+package SC2002.Lab_4;
+
 public class SalePerson implements Comparable<SalePerson> {
   private String firstName;
   private String lastName;

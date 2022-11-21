@@ -1,3 +1,5 @@
+package SC2002.Lab_3;
+
 public class PlaneSeat {
   private int seatId;
   private boolean assigned;
