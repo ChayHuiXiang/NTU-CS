@@ -3,9 +3,9 @@
 #include <time.h>
 
 #define MAX 10000000
-#define SORT_THRESHOLD 100
+#define SORT_THRESHOLD 10
 
-void insertionSort(int arr[], int low, int high) {
+void insertionSort(int arr[], int low, int high, int *count) {
     int i, j, key;
     for (i = low + 1; i <= high; i++) {
         key = arr[i]; // number to insert to the sorted array
@@ -14,6 +14,7 @@ void insertionSort(int arr[], int low, int high) {
         // check elements from the right of sorted array whether it's larger than key,
         // shift element to the right by one slot if larger
         while (j >= low && arr[j] > key) {
+            (*count)++;
             arr[j + 1] = arr[j];
             j = j - 1;
         }
@@ -32,12 +33,12 @@ void merge(int* arr, int low, int mid, int high, int *count) {
 
     // copy over items from left sorted array
     for (i = 0; i < n1; i++)
-        L[i] = arr[low + i]; 
+        L[i] = arr[low + i];
 
     // copy over items from right sorted array
     for (j = 0; j < n2; j++)
         R[j] = arr[mid + 1 + j];
-    
+
     i = 0;
     j = 0;
     k = low;
@@ -46,7 +47,7 @@ void merge(int* arr, int low, int mid, int high, int *count) {
         (*count)++;
         // compare first item from left array with first item from right array, copy smaller item over
         // repeats until either left or right array is empty
-        if (L[i] <= R[j]) { 
+        if (L[i] <= R[j]) {
             arr[k] = L[i];
             i++;
         } else {
@@ -55,7 +56,7 @@ void merge(int* arr, int low, int mid, int high, int *count) {
         }
         k++;
     }
-    
+
     // copy remaining items from left array
     while (i < n1) {
         arr[k] = L[i];
@@ -74,7 +75,7 @@ void merge(int* arr, int low, int mid, int high, int *count) {
 void hybridSort(int* arr, int low, int high, int *count) {
     // use insertion sort if array is smaller than SORT_THRESHOLD
     if (high - low <= SORT_THRESHOLD) {
-        insertionSort(arr, low, high);
+        insertionSort(arr, low, high, count);
     // use merge sort if array is bigger than SORT_THRESHOLD
     } else if (low < high) {
         int mid = (low + high) / 2;
@@ -84,19 +85,28 @@ void hybridSort(int* arr, int low, int high, int *count) {
     }
 }
 
+void mergeSort(int* arr, int low, int high, int* count) {
+    if (high - low <= 1) {
+        return;
+    }
+    int mid = (low + high) / 2;
+    mergeSort(arr, low, mid, count);
+    mergeSort(arr, mid + 1, high, count);
+    merge(arr, low, mid, high, count);
+}
+
 int main() {
-    // int n, i, count = 0;
-    // for (n = 1000; n <= MAX; n *= 10) {
-    //     int* arr = (int*)malloc(sizeof(int) * MAX);
-    //     srand(time(NULL));
-    //     for (i = 0; i < n; i++) {
-    //         arr[i] = rand() % n + 1;
-    //     }
-    //     count = 0;
-    //     hybridSort(arr, 0, n - 1, &count);
-    //     printf("For n = %d, number of key comparisons = %d\n", n, count);
-    // }
-    int arr[10] = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-    insertionSort(arr, 0, 9);
+    int n, i, count = 0;
+    for (n = 1000; n <= MAX; n *= 10) {
+        int* arr = (int*)malloc(sizeof(int) * n);
+        srand(time(NULL));
+        for (i = 0; i < n; i++) {
+            arr[i] = rand() % n + 1;
+        }
+        count = 0;
+        mergeSort(arr, 0, n - 1, &count);
+        printf("For n = %d, number of key comparisons = %d\n", n, count);
+        free(arr);
+    }
     return 0;
 }

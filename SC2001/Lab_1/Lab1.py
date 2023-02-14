@@ -1,5 +1,5 @@
 import random
-SORT_THRESHOLD = 100
+SORT_THRESHOLD = 10
 
 def merge(left, right, count):
   sorted_arr = []
@@ -46,6 +46,15 @@ def insertionsort(arr):
         break
   return arr, count
 
+def mergesort(arr):
+  length = len(arr)
+  if length == 1:
+    return arr, 0
+  mid = length // 2
+  left, leftCount = mergesort(arr[:mid])
+  right, rightCount = mergesort(arr[mid:])
+  return merge(left, right, leftCount + rightCount)
+
 if __name__ == "__main__":
   START = 1000
   END = 10000000
@@ -53,5 +62,7 @@ if __name__ == "__main__":
     arr = []
     for i in range(START):
       arr.append(random.randint(0, START))
-    answer, count = insertionsort(arr)
+
+    answer, count = mergesort(arr)
     START *= 10
+    print(f"n: {START}, count: {count}")
