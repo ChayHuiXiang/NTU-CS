@@ -1,5 +1,5 @@
 import random
-SORT_THRESHOLD = 10
+SORT_THRESHOLD = 4
 
 def merge(left, right, count):
   sorted_arr = []
@@ -57,12 +57,13 @@ def mergesort(arr):
 
 if __name__ == "__main__":
   START = 1000
-  END = 10000000
+  END = 1000
   while START <= END:
     arr = []
     for i in range(START):
       arr.append(random.randint(0, START))
 
-    answer, count = mergesort(arr)
+    arr = [12, 13, 14, 5, 6, 7 , 18, 1293, 3248, 234]
+    answer, count = hybridsort(arr)
     START *= 10
     print(f"n: {START}, count: {count}")

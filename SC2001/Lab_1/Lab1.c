@@ -21,6 +21,16 @@ void insertionSort(int arr[], int low, int high, int *count) {
         // insert number into the right slot of the sorted array
         arr[j + 1] = key;
     }
+
+    // for (int i = 1; i <= high; i++) {
+    //     for (int j = i; j > 0; j--) {
+    //         if (arr[j] < arr[j-1]) {
+    //             int temp = arr[j];
+    //             arr[j] = arr[j-1];
+    //             arr[j-1] = temp;
+    //         }
+    //     }
+    // }
 }
 
 void merge(int* arr, int low, int mid, int high, int *count) {
@@ -70,6 +80,9 @@ void merge(int* arr, int low, int mid, int high, int *count) {
         j++;
         k++;
     }
+
+    free(L);
+    free(R);
 }
 
 void hybridSort(int* arr, int low, int high, int *count) {
@@ -77,7 +90,7 @@ void hybridSort(int* arr, int low, int high, int *count) {
     if (high - low <= SORT_THRESHOLD) {
         insertionSort(arr, low, high, count);
     // use merge sort if array is bigger than SORT_THRESHOLD
-    } else if (low < high) {
+    } else {
         int mid = (low + high) / 2;
         hybridSort(arr, low, mid, count);
         hybridSort(arr, mid + 1, high, count);
@@ -104,7 +117,7 @@ int main() {
             arr[i] = rand() % n + 1;
         }
         count = 0;
-        mergeSort(arr, 0, n - 1, &count);
+        hybridSort(arr, 0, n - 1, &count);
         printf("For n = %d, number of key comparisons = %d\n", n, count);
         free(arr);
     }
