@@ -7,7 +7,7 @@ Tick,ready list,current thread,Timer Interrupt triggered,Thread completion,Conte
 120,child5 child6 main,child4,timer interrupt reset to 160,thread 4 completed,child5
 130,child6 main,child5,timer interrupt reset to 170,thread 5 completed,child6
 140,main,child6,timer interrupt reset to 180,thread 6 completed,main
-180,child7 child8 child9,main,timer interrupt scheudled at 220,n/a,child7
+180,child7 child8 child9,main,timer interrupt scheduled at 220,n/a,child7
 190,child8 child9 main,child7,timer interrupt reset to 230,thread 7 completed,child8
 200,child9 main,child8,timer interrupt reset to 240,thread 8 completed,child9
 210,main,child9,timer interrupt reset to 250,thread 9 completed,main
