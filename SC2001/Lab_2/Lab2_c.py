@@ -4,6 +4,46 @@ import random
 import csv
 import time
 
+def extractCheapest(pq):
+  cheapest = -1
+  weight = math.inf
+  cheapestIndex = 0
+  index = 0
+  for i in pq:
+    if i[0] < weight:
+      cheapest = i[1]
+      cheapestIndex = index
+    index += 1
+  
+  pq.pop(cheapestIndex)
+  return (weight, cheapest)
+
+def mat_dijkstra(graph, start):
+  V = len(graph)
+  d = [math.inf for i in range(V)]
+  pi = [None for i in range(V)]
+  visited = [False for i in range(V)]
+  pq = []
+  if V > 0:
+    d[start] = 0
+    pq = [(0, start)]
+
+  while len(pq):
+    (weight, curr) = extractCheapest(pq)
+    if visited[curr] == True:
+      continue
+    visited[curr] = True
+    startingMat = graph[curr]
+    for i in range(V):
+      node = startingMat[i]
+      dist_from_start = node + d[curr]
+      if node > 0 and dist_from_start < d[i]:
+        d[i] = dist_from_start
+        pi[i] = curr
+        pq.append((dist_from_start, i))
+
+  return d, pi
+
 def dijkstra(graph, start):
   V = len(graph)
   d = [math.inf for i in range(V)]
@@ -39,6 +79,14 @@ def randomiseGraph(graph, V, E):
     if graph[row][col] == 0:
       graph[row][col] = weight
       E -= 1
+
+def randomiseSparseGraph(graph, V):
+  for i in range(V):
+    row = i
+    col = (i + 1) % V
+    weight = random.randint(1, 10)
+    if graph[row][col] == 0:
+      graph[row][col] = weight
 
 def randomiseConnectedGraph(graph, V):
   for row in range(V):
@@ -76,42 +124,29 @@ if __name__ == "__main__":
   # # -----
   
   header = ["V", "E", "time"]
-  f = open("data_b3.csv", "w")
+  f = open("data_c2.csv", "w")
   writer = csv.writer(f)
   writer.writerow(header)
 
   V = 0
-  while V <= 1000:
-    E = 0
-    while E < (V - 1) * (V - 1) and E < 10000000: # Maximum number of edges
-      V = int(input("Enter number of vertices (V): "))
-      E = int(input("Enter number of edges (E): "))
-      graph = [[0 for i in range(V)] for i in range(V)]
-      randomiseGraph(graph, V)
-      graph = convertList(graph, V)
+  while V <= 100:
+    # E = V # For sparse graphs
+    E = (V-1) * (V-1) # For dense graphs
 
-      # print("Graph: ")
-      # print(graph)
-      # print()
+    graph = [[0 for i in range(V)] for i in range(V)]
+    # randomiseSparseGraph(graph, V) # For sparse graphs
+    randomiseConnectedGraph(graph, V) # For dense graphs
+    # graph = convertList(graph, V) # Convert adjacency matrix to adj list
 
-      start = time.time()
-      [d, pi] = dijkstra(graph, 0)
-      end = time.time()
-      # print(f"d array: {d}")
-      # print(f"pi array: {pi}")
-      print(f"Time taken in seconds for V = {V} and E = {E}: {end - start}")
-      writer.writerow([V, E, end-start])
-      E += 2000
+    start = time.time()
+    [d, pi] = mat_dijkstra(graph, 0)
+    # [d, pi] = dijkstra(graph, 0)
+    end = time.time()
 
-    # if str(E)[0] == "5":
-    #   E *= 2
-    # else:
-    #   E *= 5
-    # if str(V)[0] == "5":
-    #   V *= 2
-    # else:
-    #   V *= 5
-    V += 50
+    print(f"Time taken in seconds for V = {V} and E = {E}: {end - start}")
+    writer.writerow([V, E, end-start])
+
+    V += 1
 
   f.close()
 

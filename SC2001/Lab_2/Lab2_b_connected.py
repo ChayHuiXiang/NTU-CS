@@ -40,6 +40,14 @@ def randomiseGraph(graph, V, E):
       graph[row][col] = weight
       E -= 1
 
+def randomiseSparseGraph(graph, V):
+  for i in range(V):
+    row = i
+    col = (i + 1) % V
+    weight = random.randint(1, 10)
+    if graph[row][col] == 0:
+      graph[row][col] = weight
+
 def randomiseConnectedGraph(graph, V):
   for row in range(V):
     for col in range(V):
@@ -76,41 +84,27 @@ if __name__ == "__main__":
   # # -----
   
   header = ["V", "E", "time"]
-  f = open("data_b3.csv", "w")
+  f = open("data_b4.csv", "w")
   writer = csv.writer(f)
   writer.writerow(header)
 
   V = 0
   while V <= 1000:
-    E = 0
-    while E < (V - 1) * (V - 1) and E < 10000000: # Maximum number of edges
-      V = int(input("Enter number of vertices (V): "))
-      E = int(input("Enter number of edges (E): "))
-      graph = [[0 for i in range(V)] for i in range(V)]
-      randomiseGraph(graph, V)
-      graph = convertList(graph, V)
+    E = V # For sparse graphs
+    # E = (V-1) * (V-1) # For dense graphs
 
-      # print("Graph: ")
-      # print(graph)
-      # print()
+    graph = [[0 for i in range(V)] for i in range(V)]
+    randomiseSparseGraph(graph, V) # For sparse graphs
+    # randomiseConnectedGraph(graph, V) # For dense graphs
+    graph = convertList(graph, V) # Convert adjacency matrix to adj list
 
-      start = time.time()
-      [d, pi] = dijkstra(graph, 0)
-      end = time.time()
-      # print(f"d array: {d}")
-      # print(f"pi array: {pi}")
-      print(f"Time taken in seconds for V = {V} and E = {E}: {end - start}")
-      writer.writerow([V, E, end-start])
-      E += 2000
+    start = time.time()
+    [d, pi] = dijkstra(graph, 0)
+    end = time.time()
 
-    # if str(E)[0] == "5":
-    #   E *= 2
-    # else:
-    #   E *= 5
-    # if str(V)[0] == "5":
-    #   V *= 2
-    # else:
-    #   V *= 5
+    print(f"Time taken in seconds for V = {V} and E = {E}: {end - start}")
+    writer.writerow([V, E, end-start])
+
     V += 50
 
   f.close()

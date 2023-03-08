@@ -1,5 +1,6 @@
 import math
 import random
+import time
 
 def extractCheapest(pq):
   cheapest = -1
@@ -45,8 +46,11 @@ def randomiseGraph(graph, V, E):
     row = random.randint(0, V-1)
     col = random.randint(0, V-1)
     weight = random.randint(1, 10)
-    graph[row][col] = weight
-    E -= 1
+    if row == col:
+      continue
+    if graph[row][col] == 0:
+      graph[row][col] = weight
+      E -= 1
 
 if __name__ == "__main__":
 
@@ -75,6 +79,9 @@ if __name__ == "__main__":
   print(graph)
   print()
 
+  start = time.time()
   [d, pi] = dijkstra(graph, 0)
+  end = time.time()
   print(f"d array: {d}")
   print(f"pi array: {pi}")
+  print(f"Time taken in seconds: {end - start}")
