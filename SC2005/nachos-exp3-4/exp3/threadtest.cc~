@@ -84,6 +84,7 @@ void TestValueOne()
 	t3->Fork(Dec_v1, 3, 0);
 	t4->Fork(Dec_v1, 4, 0);
 
+	// currentThread->Yield();
 	currentThread->Join(t2);
 
 	//2. checking the value. you should not modify the code or add any code lines behind
@@ -138,6 +139,7 @@ void TestValueMinusOne()
         t3->Fork(Inc_v2, 3, 0);
         t4->Fork(Inc_v2, 4, 0);
 
+        // currentThread->Yield();
         currentThread->Join(t2);
 
 	//2. checking the value. you should not modify the code or add any code lines behind
@@ -155,30 +157,17 @@ void TestValueMinusOne()
 //1. Declare any paramters here.
 
 //fill your code
-Lock* lock = new Lock("lock");
 
 //2. implement the new version of Inc: Inc_Consistent
 void Inc_Consistent(_int which)
 {
 	//fill your code
-	lock->Acquire();
-	int a=value;
-        a++;
-	value=a;
-        printf("**** Inc thread %d new value %d\n", (int) which, value);
-	lock->Release();
 }
 
 //3. implement the new version of Dec: Dec_Consistent
 void Dec_Consistent(_int which)
 {
 	//fill your code
-	lock->Acquire();
-	int a=value;
-        a--;
-	value=a;
-        printf("**** Dec thread %d new value %d\n", (int) which, value);
-	lock->Release();
 }
 
 //4. implement TestValueMinusOne by create two threads with Inc_Consistent and two threads with Dec_Consistent
@@ -189,19 +178,7 @@ void TestConsistency()
 	printf("enter TestConsistency, value=%d...\n", value);
 
 	//fill your code
-	Thread* t1 = new Thread("thread1(Inc_Consistent)");
-	Thread* t2 = new Thread("thread2(Inc_Consistent)");
-	
-	t1->Fork(Inc_Consistent, 1, 0);
-	t2->Fork(Inc_Consistent, 2, 0);
 
-	Thread* t3 = new Thread("thread3(Dec_Consistent)");
-	Thread* t4 = new Thread("thread4(Dec_Consistent)");
-
-	t3->Fork(Dec_Consistent, 3, 0);
-	t4->Fork(Dec_Consistent, 4, 1);
-
-	currentThread->Join(t4);
 
 	//2. checking the value. you should not modify the code or add any code lines behind
 	//this section.
@@ -218,8 +195,8 @@ ThreadTest()
 	int loopTimes=0;
     DEBUG('t', "Entering SimpleTest");
 	//for exercise 1.
-    TestValueOne();
+    //TestValueOne();
     TestValueMinusOne();
     //for exercise 2.
-    TestConsistency();
+    //TestConsistency();
 }

@@ -46,22 +46,22 @@ void Dec(_int which)
 //1. implement the new version of Inc: Inc_v1
 void Inc_v1(_int which)
 {
-	//fill your code
-        int a=value;
-        a++;
+	int a=value;
+	a++;
 	currentThread->Yield();
-        value=a;
-        printf("**** Inc thread %d new value %d\n", (int) which, value);
+	value=a;
+	printf("**** Inc thread %d new value %d\n", (int) which, value);
+	//fill your code
 }
 
 //2. implement the new version of Dec: Dec_v1
 void Dec_v1(_int which)
 {
-	//fill your code
 	int a=value;
-        a--;
+	a--;
 	value=a;
-        printf("**** Dec thread %d new value %d\n", (int) which, value);
+	printf("**** Dec thread %d new value %d\n", (int) which, value);
+	//fill your code
 }
 
 //3. implement TestValueOne by create two threads with Inc_v1 and two threads with Dec_v1
@@ -71,18 +71,16 @@ void TestValueOne()
 	value=0;
 	printf("enter TestValueOne, value=%d...\n", value);
 	//1. fill your code here.
-	
-	Thread* t1 = new Thread("thread1(Inc_v1)");
-	Thread* t2 = new Thread("thread2(Inc_v1)");
-	
-	t1->Fork(Inc_v1, 1, 0);
-	t2->Fork(Inc_v1, 2, 1);
-	
-	Thread* t3 = new Thread("thread3(Dec_v1)");
-	Thread* t4 = new Thread("thread4(Dec_v1)");
 
-	t3->Fork(Dec_v1, 3, 0);
-	t4->Fork(Dec_v1, 4, 0);
+	Thread* t1 = new Thread("thread1");
+	Thread* t2 = new Thread("thread2");
+	t1->Fork(Inc_v1, 1, 0);
+	t2->Fork(Inc_v1, 1, 1);
+
+	Thread* t3 = new Thread("thread3");
+	Thread* t4 = new Thread("thread4");
+	t3->Fork(Dec_v1, 1, 0);
+	t4->Fork(Dec_v1, 1, 0);
 
 	currentThread->Join(t2);
 
@@ -101,21 +99,21 @@ void TestValueOne()
 void Inc_v2(_int which)
 {
 	//fill your code
-        int a=value;
-        a++;
-        value=a;
-        printf("**** Inc thread %d new value %d\n", (int) which, value);
+	int a=value;
+	a++;
+	value=a;
+	printf("**** Inc thread %d new value %d\n", (int) which, value);
 }
 
 //2. implement the new version of Dec: Dec_v2
 void Dec_v2(_int which)
 {
-        //fill your code
-        int a=value;
-        a--;
+	//fill your code
+	int a=value;
+	a--;
 	currentThread->Yield();
 	value=a;
-        printf("**** Dec thread %d new value %d\n", (int) which, value);
+	printf("**** Dec thread %d new value %d\n", (int) which, value);
 }
 
 //3. implement TestValueMinusOne by create two threads with Inc_v2 and two threads with Dec_v2
@@ -125,20 +123,19 @@ void TestValueMinusOne()
 	value=0;
 	printf("enter TestValueMinusOne, value=%d...\n", value);
 
+
 	//fill your code
-	Thread* t1 = new Thread("thread1(Dec_v2)");
-        Thread* t2 = new Thread("thread2(Dec_v2)");
+	Thread* t1 = new Thread("thread1");
+	Thread* t2 = new Thread("thread1");
+	t1->Fork(Dec_v2, 1, 0);
+	t2->Fork(Dec_v2, 2, 1);
 
-        t1->Fork(Dec_v2, 1, 0);
-        t2->Fork(Dec_v2, 2, 1);
+	Thread* t3 = new Thread("thread1");
+	Thread* t4 = new Thread("thread1");
+	t2->Fork(Inc_v2, 3, 0);
+	t2->Fork(Inc_v2, 4, 0);
 
-        Thread* t3 = new Thread("thread3(Inc_v2)");
-        Thread* t4 = new Thread("thread4(Inc_v2)");
-
-        t3->Fork(Inc_v2, 3, 0);
-        t4->Fork(Inc_v2, 4, 0);
-
-        currentThread->Join(t2);
+	currentThread->Join(t2);
 
 	//2. checking the value. you should not modify the code or add any code lines behind
 	//this section.
@@ -154,8 +151,9 @@ void TestValueMinusOne()
 
 //1. Declare any paramters here.
 
-//fill your code
 Lock* lock = new Lock("lock");
+
+//fill your code
 
 //2. implement the new version of Inc: Inc_Consistent
 void Inc_Consistent(_int which)
@@ -163,9 +161,9 @@ void Inc_Consistent(_int which)
 	//fill your code
 	lock->Acquire();
 	int a=value;
-        a++;
+	a++;
 	value=a;
-        printf("**** Inc thread %d new value %d\n", (int) which, value);
+	printf("**** Inc thread %d new value %d\n", (int) which, value);
 	lock->Release();
 }
 
@@ -175,10 +173,11 @@ void Dec_Consistent(_int which)
 	//fill your code
 	lock->Acquire();
 	int a=value;
-        a--;
+	a--;
 	value=a;
-        printf("**** Dec thread %d new value %d\n", (int) which, value);
+	printf("**** Dec thread %d new value %d\n", (int) which, value);
 	lock->Release();
+
 }
 
 //4. implement TestValueMinusOne by create two threads with Inc_Consistent and two threads with Dec_Consistent
@@ -189,19 +188,17 @@ void TestConsistency()
 	printf("enter TestConsistency, value=%d...\n", value);
 
 	//fill your code
-	Thread* t1 = new Thread("thread1(Inc_Consistent)");
-	Thread* t2 = new Thread("thread2(Inc_Consistent)");
-	
+	Thread* t1 = new Thread("thread1");
+	Thread* t2 = new Thread("thread2");
 	t1->Fork(Inc_Consistent, 1, 0);
-	t2->Fork(Inc_Consistent, 2, 0);
+	t2->Fork(Inc_Consistent, 2, 1);
 
-	Thread* t3 = new Thread("thread3(Dec_Consistent)");
-	Thread* t4 = new Thread("thread4(Dec_Consistent)");
-
+	Thread* t3 = new Thread("thread2");
+	Thread* t4 = new Thread("thread2");
 	t3->Fork(Dec_Consistent, 3, 0);
-	t4->Fork(Dec_Consistent, 4, 1);
+	t4->Fork(Dec_Consistent, 4, 0);
 
-	currentThread->Join(t4);
+	currentThread->Join(t2);
 
 	//2. checking the value. you should not modify the code or add any code lines behind
 	//this section.
@@ -219,7 +216,7 @@ ThreadTest()
     DEBUG('t', "Entering SimpleTest");
 	//for exercise 1.
     TestValueOne();
-    TestValueMinusOne();
+    //TestValueMinusOne();
     //for exercise 2.
-    TestConsistency();
+    //TestConsistency();
 }
