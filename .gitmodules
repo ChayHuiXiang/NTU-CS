@@ -4,3 +4,9 @@
 [submodule "SC2002/MOBLIMA"]
 	path = SC2002/MOBLIMA
 	url = https://github.com/chayhuixiang/MOBLIMA.git
+[submodule "SC1015/ahamazon-mssql-db"]
+	path = SC1015/ahamazon-mssql-db
+	url = https://github.com/chayhuixiang/ahamazon-mssql-db
+[submodule "SC2207/ahamazon-mssql-db"]
+	path = SC2207/ahamazon-mssql-db
+	url = https://github.com/chayhuixiang/ahamazon-mssql-db
