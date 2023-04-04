@@ -1,23 +1,22 @@
 
-def dp(weights, profits, n, C):
+def dp(weights, profits, C, n):
+
   # Initialise DP Table
-  table = [[0 for i in range(n + 1)] for i in range(C + 1)]
+  table = [0 for i in range(C + 1)]
 
-  # Fill up table row by row
-  for i in range(C + 1):
-    for j in range(1, n + 1):
-      weight = weights[j-1]
-      profit = profits[j-1]
+  # Fill up table from bottom-up by capacity
+  for i in range(1, C + 1):
 
-      # Profits if cj was unused
-      unused = table[i][j-1]
+    # maxProfit refers to the max profit at current capacity
+    maxProfit = 0
+    for j in range(n):
+      profit = table[i - weights[j]] + profits[j] if i - weights[j] >= 0 else 0
+      maxProfit = max(profit, maxProfit)
 
-      # Profits if cj was used
-      used = table[i - weight][j] + profit if i - weight >= 0 else 0
+    # Set the entry in the table to the max profit at current capacity
+    table[i] = maxProfit
 
-      # Set the entry in the table to the max of unused and used
-      table[i][j] = max(unused, used)
-  return table[C][n]
+  return table[C]
 
 if __name__ == "__main__":
 
@@ -25,12 +24,14 @@ if __name__ == "__main__":
   weights1 = [4, 6, 8]
   profits1 = [7, 6, 9]
   n1 = len(weights1)
+
   capacity1 = 14
 
-  result = dp(weights1, profits1, n1, capacity1)
+  result = dp(weights1, profits1, capacity1, n1)
   print()
   print(f"Result of 4a: {result}")
   print()
+
   # 4(b) parameters
   weights2 = [5, 6, 8]
   profits2 = [7, 6, 9]
@@ -38,6 +39,6 @@ if __name__ == "__main__":
 
   capacity2 = 14
 
-  result = dp(weights2, profits2, n2, capacity2)
+  result = dp(weights2, profits2, capacity2, n2)
   print(f"Result of 4b: {result}")
   print()
