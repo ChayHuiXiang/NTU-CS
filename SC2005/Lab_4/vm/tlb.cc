@@ -19,7 +19,7 @@ void UpdateTLB(int possible_badVAddr)
   int phyPage;
   
   for (int i = 0; i < NumPhysPages; i++) {
-    printf("IPT %d, pid %d, vpn %d, last used %d, valid %d\n", i, currentThread->pid, memoryTable[i].vPage, memoryTable[i].lastUsed, memoryTable[i].valid);
+    printf("IPT %d, pid %d, vpn %d, last used %d, valid %d\n", i, memoryTable[i].pid, memoryTable[i].vPage, memoryTable[i].lastUsed, memoryTable[i].valid);
   }
 
   for (int i = 0; i < TLBSize; i++) {
@@ -75,23 +75,20 @@ static int FIFOPointer = 0;
 void InsertToTLB(int vpn, int phyPage)
 {
   int i = FIFOPointer; //entry in the TLB
-  
-  //your code to find an empty in TLB or to replace the oldest entry if TLB is full
+  //your code to find an empty in TLB or 
+  //to replace the oldest entry if TLB is full
   for (int j = 0; j < TLBSize; j++) {
     if (!machine->tlb[j].valid) {
       i = j;
       break;
     }
   }
-  
   FIFOPointer = (i+1) % TLBSize;
-
   // copy dirty data to memoryTable
   if(machine->tlb[i].valid){
     memoryTable[machine->tlb[i].physicalPage].dirty=machine->tlb[i].dirty;
     memoryTable[machine->tlb[i].physicalPage].TLBentry=-1;
   }
-
   //update the TLB entry
   machine->tlb[i].virtualPage  = vpn;
   machine->tlb[i].physicalPage = phyPage;
@@ -106,10 +103,8 @@ void InsertToTLB(int vpn, int phyPage)
   //reset lastUsed to current ticks since it is being used at this moment.
   //for the implementation of LRU algorithm.
   memoryTable[phyPage].lastUsed = stats->totalTicks; 
-  
   //increase the number of tlb misses
   stats->numTlbMisses++;
-  
 }
 
 //----------------------------------------------------------------------
@@ -159,7 +154,7 @@ void DoPageOut(int phyPage)
     if(memoryTable[phyPage].TLBentry!=-1){
       memoryTable[phyPage].dirty=
         machine->tlb[memoryTable[phyPage].TLBentry].dirty;
-      machine->tlb[memoryTable[phyPage].TLBentry].valid=FALSE;
+      machine->tlb[memoryTable[phyPage].TLBentry].valid=FALSE; // tlb
     }
     if(memoryTable[phyPage].dirty){        // pageOut is necessary
       if((mmapPtr=GetMmap(memoryTable[phyPage].vPage))){ // it's mmaped
@@ -186,7 +181,7 @@ void DoPageOut(int phyPage)
       stats->numPageOuts++;
     }
     
-    memoryTable[phyPage].valid=FALSE;
+    memoryTable[phyPage].valid=FALSE; // ipt
   }
 }
 

@@ -10,3 +10,6 @@
 [submodule "SC2207/ahamazon-mssql-db"]
 	path = SC2207/ahamazon-mssql-db
 	url = https://github.com/chayhuixiang/ahamazon-mssql-db
+[submodule "SC1015/OPTIMU-Analytics"]
+	path = SC1015/OPTIMU-Analytics
+	url = https://github.com/chayhuixiang/OPTIMU-Analytics.git
